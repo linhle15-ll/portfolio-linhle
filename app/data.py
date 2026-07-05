@@ -1,7 +1,7 @@
 profile = {
-    "name": "Maya Okafor",
-    "first_name": "Maya",
-    "last_name": "Okafor",
+    "name": "Linh Le",
+    "first_name": "Linh",
+    "last_name": "Le",
     "role": "Product Designer & Visual Storyteller",
     "location": "Lisbon, Portugal",
     "email": "hello@mayaokafor.com",
