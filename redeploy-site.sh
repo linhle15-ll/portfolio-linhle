@@ -9,6 +9,11 @@ git fetch && git reset origin/main --hard
 source python3-virtualvenv/bin/activate
 pip install -r requirements.txt
 
-tmux new-session -d -s portfolio -c ~/portfolio-linhle \; send-keys "source python3-virtualvenv/bin/activate && flask run --host=0.0.0.0 --port=5000" Enter
+# tmux new-session -d -s portfolio -c ~/portfolio-linhle \; send-keys "source python3-virtualvenv/bin/activate && flask run --host=0.0.0.0 --port=5000" Enter
+# using systemd instead of tmux
+# Restart Flask via systemd
+systemctl daemon-reload
+systemctl restart myportfolio
+systemctl status myportfolio
 
 echo "Done! Flask is running at http://linhthechef.duckdns.org:5000"
