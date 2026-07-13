@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Timeline — {{ profile.name }}{% endblock %}
+
+{% block profile_block %}
+<header class="page-header">
+  <div class="container page-header-inner">
+    <p class="eyebrow">Timeline</p>
+    <h1 class="page-title">Posts</h1>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 48px; padding-bottom: 96px;">
+
+  <!-- Form -->
+  <form id="form" style="display: flex; flex-direction: column; gap: 12px; max-width: 480px;">
+    <input name="name" type="text" placeholder="Name" required>
+    <input name="email" type="email" placeholder="Email" required>
+    <textarea name="content" placeholder="What's on your mind?" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Posts -->
+  <div id="posts" style="margin-top: 48px;"></div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const form = document.getElementById('form');
+  const postsDiv = document.getElementById('posts');
+
+  function loadPosts() {
+    fetch('/api/timeline_post')
+      .then(res => res.json())
+      .then(data => {
+        postsDiv.innerHTML = '';
+        data.timeline_posts.forEach(post => {
+          postsDiv.innerHTML += `
+            <div style="border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+                        padding: 20px; margin-bottom: 16px; background: var(--color-card);">
+              <strong>${post.name}</strong> &middot; <span style="color: var(--color-muted-foreground)">${post.email}</span>
+              <p style="margin-top: 10px;">${post.content}</p>
+              <small style="color: var(--color-muted-foreground)">${post.created_at}</small>
+            </div>`;
+        });
+      });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const payload = new FormData(form);
+
+    fetch('/api/timeline_post', {
+      method: 'POST',
+      body: payload,
+    })
+    .then(res => res.json())
+    .then(data => {
+      form.reset();
+      loadPosts();
+    });
+  });
+
+  loadPosts();
+</script>
+{% endblock %}
