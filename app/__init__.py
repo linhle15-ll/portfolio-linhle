@@ -7,11 +7,9 @@ import datetime
 from app.data import (
     profile,
     about_paragraphs,
-    marquee_items,
     experiences,
     education,
-    hobbies,
-    trips,
+    journal_entries,
 )
 
 app = Flask(__name__)
@@ -28,13 +26,12 @@ if database_user and database_password:
         user=database_user,
         password=database_password,
         host=database_host,
-        port=3306,
+        port=3306
     )
 else:
     mydb = SqliteDatabase("timeline.db")
 
 print(f"MY DATABASE {mydb}")
-
 
 class TimelinePost(Model):
     name = CharField()
@@ -45,7 +42,6 @@ class TimelinePost(Model):
     class Meta:
         database = mydb
 
-
 mydb.connect(reuse_if_open=True)
 mydb.create_tables([TimelinePost], safe=True)
 
@@ -53,9 +49,7 @@ mydb.create_tables([TimelinePost], safe=True)
 nav_links = [
     {"label": "Home", "href": "/"},
     {"label": "Experience", "href": "/experience"},
-    {"label": "Education", "href": "/education"},
-    {"label": "Hobbies", "href": "/hobbies"},
-    {"label": "Travel", "href": "/travel"},
+    {"label": "Journal", "href": "/journal"},
     {"label": "Timeline", "href": "/timeline"}
 ]
 
@@ -75,7 +69,7 @@ def home():
     return render_template(
         "index.html",
         about_paragraphs=about_paragraphs,
-        marquee_items=marquee_items,
+        education_info=education[0] if education else {},
     )
 
 
@@ -83,18 +77,9 @@ def home():
 def experience():
     return render_template("experience.html", experiences=experiences)
 
-@app.route("/education")
-def education_page():
-    return render_template("education.html", education=education)
-
-@app.route("/hobbies")
-def hobbies_page():
-    return render_template("hobbies.html", hobbies=hobbies)
-
-
-@app.route("/travel")
-def travel():
-    return render_template("travel.html", trips=trips)
+@app.route("/journal")
+def journal():
+    return render_template("journal.html", gallery=journal_entries)
 
 @app.route("/timeline")
 def timeline():
