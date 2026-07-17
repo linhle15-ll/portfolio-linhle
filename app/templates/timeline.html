@@ -1,68 +1,133 @@
-{% extends "base.html" %}
-
-{% block title %}Timeline — {{ profile.name }}{% endblock %}
-
-{% block profile_block %}
+{% extends "base.html" %} {% block title %}Timeline — {{ profile.name }}{%
+endblock %} {% block content %}
 <header class="page-header">
   <div class="container page-header-inner">
     <p class="eyebrow">Timeline</p>
     <h1 class="page-title">Posts</h1>
+    <p class="page-description">Drop a note, a thought, or a hot take.</p>
   </div>
 </header>
-{% endblock %}
 
-{% block content %}
-<div class="container" style="padding-top: 48px; padding-bottom: 96px;">
-
+<div class="container timeline-page">
   <!-- Form -->
-  <form id="form" style="display: flex; flex-direction: column; gap: 12px; max-width: 480px;">
-    <input name="name" type="text" placeholder="Name" required>
-    <input name="email" type="email" placeholder="Email" required>
-    <textarea name="content" placeholder="What's on your mind?" required></textarea>
-    <button type="submit">Submit</button>
-  </form>
+  <div class="tl-form-card">
+    <h2>New Post</h2>
+    <form id="timeline-form" novalidate>
+      <div class="tl-field">
+        <label for="tl-name">Name</label>
+        <input
+          id="tl-name"
+          name="name"
+          type="text"
+          placeholder="Your name"
+          required
+        />
+      </div>
+      <div class="tl-field">
+        <label for="tl-email">Email</label>
+        <input
+          id="tl-email"
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          required
+        />
+      </div>
+      <div class="tl-field">
+        <label for="tl-content">Message</label>
+        <textarea
+          id="tl-content"
+          name="content"
+          placeholder="What's on your mind?"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" class="tl-submit">
+        <svg class="icon icon-sm" viewBox="0 0 24 24">
+          <line x1="22" y1="2" x2="11" y2="13" />
+          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg>
+        Post it
+      </button>
+    </form>
+  </div>
 
   <!-- Posts -->
-  <div id="posts" style="margin-top: 48px;"></div>
-
+  <div class="tl-posts-header">
+    <h2>Posts</h2>
+    <span class="tl-post-count" id="tl-count"></span>
+  </div>
+  <div id="posts"></div>
 </div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script>
-  const form = document.getElementById('form');
-  const postsDiv = document.getElementById('posts');
+  const form = document.getElementById("timeline-form");
+  const postsDiv = document.getElementById("posts");
+
+  function initials(name) {
+    return name
+      .trim()
+      .split(/\s+/)
+      .map((w) => w[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+  }
 
   function loadPosts() {
-    fetch('/api/timeline_post')
-      .then(res => res.json())
-      .then(data => {
-        postsDiv.innerHTML = '';
-        data.timeline_posts.forEach(post => {
+    fetch("/api/timeline_post")
+      .then((res) => res.json())
+      .then((data) => {
+        const posts = data.timeline_posts || [];
+        document.getElementById("tl-count").textContent =
+          posts.length + " post" + (posts.length !== 1 ? "s" : "");
+        postsDiv.innerHTML = "";
+        if (posts.length === 0) {
+          postsDiv.innerHTML =
+            '<div class="tl-empty">No posts yet — be the first!</div>';
+          return;
+        }
+        posts.forEach((post) => {
           postsDiv.innerHTML += `
-            <div style="border: 1px solid var(--color-border); border-radius: var(--radius-sm);
-                        padding: 20px; margin-bottom: 16px; background: var(--color-card);">
-              <strong>${post.name}</strong> &middot; <span style="color: var(--color-muted-foreground)">${post.email}</span>
-              <p style="margin-top: 10px;">${post.content}</p>
-              <small style="color: var(--color-muted-foreground)">${post.created_at}</small>
+            <div class="tl-post">
+              <div class="tl-post-meta">
+                <div class="tl-post-avatar">${initials(post.name)}</div>
+                <div>
+                  <div class="tl-post-name">${post.name}</div>
+                  <div class="tl-post-email">${post.email}</div>
+                </div>
+                <div class="tl-post-meta-right">
+                  <button type="button" class="tl-post-delete" onclick="deletePost(${post.id})" aria-label="Delete post">
+                    ×
+                  </button>
+                  <div class="tl-post-date">${post.created_at ? post.created_at.replace("T", " ").slice(0, 16) : ""}</div>
+                </div>
+              </div>
+              <p class="tl-post-content">${post.content}</p>
             </div>`;
         });
       });
   }
 
-  form.addEventListener('submit', function(e) {
+  function deletePost(postId) {
+    fetch(`/api/timeline_post/${postId}`, { method: "DELETE" })
+      .then((res) => {
+        if (!res.ok) throw new Error("Unable to delete post");
+        return res.json();
+      })
+      .then(() => loadPosts())
+      .catch((err) => console.error(err));
+  }
+
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
     const payload = new FormData(form);
-
-    fetch('/api/timeline_post', {
-      method: 'POST',
-      body: payload,
-    })
-    .then(res => res.json())
-    .then(data => {
-      form.reset();
-      loadPosts();
-    });
+    fetch("/api/timeline_post", { method: "POST", body: payload })
+      .then((res) => res.json())
+      .then(() => {
+        form.reset();
+        loadPosts();
+      });
   });
 
   loadPosts();

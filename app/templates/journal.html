@@ -1,0 +1,200 @@
+{% extends "base.html" %} {% block title %}Food on the go — {{ profile.name }}{%
+endblock %} {% block content %}
+<header class="page-header">
+  <div class="container page-header-inner">
+    <p class="eyebrow">From the road</p>
+    <h1 class="page-title">Food on the go</h1>
+    <p class="page-description">
+      A gallery of favourite stops around the world. Tap any card to flip
+      through photos from that moment.
+    </p>
+  </div>
+</header>
+
+<section class="journal-section">
+  <div class="container">
+    <div class="gallery-grid">
+      {% for entry in gallery %}
+      <button
+        class="gallery-card"
+        type="button"
+        onclick="openLightbox({{ loop.index0 }})"
+      >
+        <div class="gallery-card-media">
+          <img
+            src="{{ url_for('static', filename='img/' ~ entry.image) }}"
+            alt="{{ entry.title }}"
+            loading="lazy"
+          />
+          <span class="gallery-card-count">
+            <svg class="icon icon-sm" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            {{ entry.images | length }}
+          </span>
+        </div>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">{{ entry.title }}</h3>
+          <div class="gallery-card-location">
+            <svg class="icon icon-sm" viewBox="0 0 24 24">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            {{ entry.location }}
+          </div>
+          <p class="gallery-card-note">{{ entry.note }}</p>
+        </div>
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-inner" id="lightboxInner">
+    <div class="lightbox-header">
+      <div>
+        <h3 class="lightbox-title" id="lbTitle"></h3>
+        <div class="lightbox-location">
+          <svg class="icon icon-sm" viewBox="0 0 24 24">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span id="lbLocation"></span>
+        </div>
+      </div>
+      <button
+        class="lightbox-close"
+        onclick="closeLightbox()"
+        aria-label="Close gallery"
+      >
+        <svg class="icon icon-md" viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="lightbox-photo" id="lbPhoto">
+      <!-- images injected by JS -->
+      <button
+        class="lightbox-nav lightbox-nav-prev"
+        onclick="prevPhoto()"
+        aria-label="Previous"
+      >
+        <svg class="icon icon-md" viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <button
+        class="lightbox-nav lightbox-nav-next"
+        onclick="nextPhoto()"
+        aria-label="Next"
+      >
+        <svg class="icon icon-md" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="lightbox-footer" id="lbFooter">
+      <!-- thumbnails injected by JS -->
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script>
+  const galleryData = {{ gallery | tojson }};
+  let currentEntry = null;
+  let currentPhoto = 0;
+
+  function openLightbox(index) {
+    currentEntry = galleryData[index];
+    currentPhoto = 0;
+    document.getElementById('lbTitle').textContent    = currentEntry.title;
+    document.getElementById('lbLocation').textContent = currentEntry.location;
+    renderPhotos();
+    document.getElementById('lightbox').classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('is-open');
+    document.body.style.overflow = '';
+    currentEntry = null;
+  }
+
+  function renderPhotos() {
+    const photoDiv = document.getElementById('lbPhoto');
+    const footer   = document.getElementById('lbFooter');
+
+    // Remove old images/thumbs (keep nav buttons)
+    photoDiv.querySelectorAll('img').forEach(el => el.remove());
+    footer.innerHTML = '';
+
+    currentEntry.images.forEach((src, i) => {
+      const imagePath = new URL(`{{ url_for('static', filename='img/') }}${src}`, window.location.origin).pathname;
+
+      // Main image
+      const img = document.createElement('img');
+      img.src = imagePath;
+      img.alt = currentEntry.title + ' — photo ' + (i + 1);
+      if (i === currentPhoto) img.classList.add('is-active');
+      photoDiv.prepend(img);
+
+      // Thumbnail
+      const thumb = document.createElement('button');
+      thumb.className = 'lightbox-thumb' + (i === currentPhoto ? ' is-active' : '');
+      thumb.onclick = () => goToPhoto(i);
+      thumb.innerHTML = `<img src="${imagePath}" alt="">`;
+      footer.appendChild(thumb);
+    });
+
+    // Counter
+    const counter = document.createElement('span');
+    counter.className = 'lightbox-counter';
+    counter.id = 'lbCounter';
+    counter.textContent = (currentPhoto + 1) + ' / ' + currentEntry.images.length;
+    footer.appendChild(counter);
+
+    // Hide nav if only one photo
+    const navEls = document.querySelectorAll('.lightbox-nav');
+    navEls.forEach(el => el.style.display = currentEntry.images.length > 1 ? '' : 'none');
+  }
+
+  function goToPhoto(i) {
+    currentPhoto = i;
+    const imgs   = document.getElementById('lbPhoto').querySelectorAll('img');
+    const thumbs = document.getElementById('lbFooter').querySelectorAll('.lightbox-thumb');
+    imgs.forEach((el, idx)   => el.classList.toggle('is-active', idx === currentPhoto));
+    thumbs.forEach((el, idx) => el.classList.toggle('is-active', idx === currentPhoto));
+    document.getElementById('lbCounter').textContent =
+      (currentPhoto + 1) + ' / ' + currentEntry.images.length;
+  }
+
+  function nextPhoto() {
+    goToPhoto((currentPhoto + 1) % currentEntry.images.length);
+  }
+
+  function prevPhoto() {
+    goToPhoto((currentPhoto - 1 + currentEntry.images.length) % currentEntry.images.length);
+  }
+
+  // Close on backdrop click
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (!currentEntry) return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowRight')  nextPhoto();
+    if (e.key === 'ArrowLeft')   prevPhoto();
+  });
+</script>
+{% endblock %}

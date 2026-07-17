@@ -2,146 +2,92 @@ profile = {
     "name": "Linh Le",
     "first_name": "Linh",
     "last_name": "Le",
-    "role": "Product Designer & Visual Storyteller",
-    "location": "Lisbon, Portugal",
-    "email": "hello@mayaokafor.com",
+    "role": "Student & Software Engineer",
+    "location": "HT, VN - MA, US",
+    "email": "lengoclinhvn05@gmail.com",
     "tagline": (
-        "I design thoughtful digital products by day and chase light, "
-        "mountains, and good food everywhere else."
+        "I work on thoughtful product every day. "
+        "I love the ocean, the mountains, the paddy fields, and my house's garden."
     ),
     "socials": [
-        {"label": "Instagram", "href": "https://instagram.com"},
-        {"label": "LinkedIn", "href": "https://linkedin.com"},
-        {"label": "Dribbble", "href": "https://dribbble.com"},
-        {"label": "GitHub", "href": "https://github.com"},
+        {"label": "Instagram", "href": "https://www.instagram.com/linhlinhlinhne/"},
+        {"label": "LinkedIn", "href": "https://www.linkedin.com/in/ngoclinhle15/"},
+        {"label": "GitHub", "href": "https://github.com/linhle15-ll"},
     ],
 }
 
 about_paragraphs = [
-    "I'm a product designer with eight years of experience turning messy "
-    "problems into clear, human interfaces. My favorite work lives where "
-    "research, visual craft, and engineering meet — building things that "
-    "feel as good as they look.",
-    "Currently I lead design at a climate-tech startup, where I shape "
-    "everything from early product strategy to the smallest interaction "
-    "detail. Before that I bounced between agencies, a fintech scale-up, "
-    "and my own freelance studio.",
-    "Away from the screen I'm usually behind a film camera, halfway up a "
-    "trail, or planning the next trip. This little corner of the internet "
-    "is where my work and my wandering finally share a page.",
-]
-
-marquee_items = [
-    "Product Design",
-    "Photography",
-    "Hiking",
-    "Cooking",
-    "Travel",
-    "Visual Storytelling",
-    "Design Systems",
-    "Vinyl",
+   "I'm a software engineer intern and a rising senior majoring in Computer Science at Mount Holyoke. "
+    "I love hiking for the quiet and the view at the "
+    "top, and I spend a lot of weekends cooking and baking.",
+    "I love travelling as well. United States is the first foreign destination I'd ever been to, and I came here for college. "
+    "Recently, a semester abroad in Budapest and trips around Europe had "
+    "me hiking new trails, hunting down local bakeries, and cooking in "
+    "a kitchen that was never quite mine. This corner of the internet "
+    "is where all of that lives on the same page.",
 ]
 
 experiences = [
     {
-        "period": "2022 — Present",
-        "role": "Lead Product Designer",
-        "company": "Verdant Labs",
-        "type": "Climate Tech",
+        "period": "June 2026 — Present",
+        "role": "Backend Software Engineer Intern",
+        "company": "CarGurus Inc",
+        "type": "Technology",
         "description": (
-            "Lead design for a carbon-tracking platform used by 40k+ "
-            "businesses. Built the design system from scratch, shipped the "
-            "mobile app, and grew the design team from one to five."
+            "Building customer's most favorite car marketplace"
+
         ),
-        "tags": ["Design Systems", "Product Strategy", "Mobile", "Figma"],
+        "tags": ["Software Engineering", "Backend Development", "Java", "GraphQL"],
     },
     {
-        "period": "2019 — 2022",
-        "role": "Senior Product Designer",
-        "company": "Northwind Financial",
-        "type": "Fintech",
+        "period": "June 2026 - Present",
+        "role": "Production Engineer Fellow",
+        "company": "MLH x Meta Production Engineering Fellowship",
+        "type": "Technology Fellowship",
         "description": (
-            "Redesigned the core investing experience for a fintech "
-            "scale-up, improving onboarding completion by 38%. Partnered "
-            "closely with research and engineering across three squads."
+            "Learnt production engineering from MLH team and Meta engineers."
         ),
-        "tags": ["UX Research", "Onboarding", "Prototyping", "Accessibility"],
+        "tags": ["Production Engineering"],
     },
     {
-        "period": "2017 — 2019",
-        "role": "Product Designer",
-        "company": "Studio Atlas",
-        "type": "Design Agency",
+        "period": "June 2025 — August 2025",
+        "role": "Software Engineer Intern",
+        "company": "FPT Information System",
+        "type": "Technology",
         "description": (
-            "Designed brands, websites, and apps for clients across "
-            "travel, food, and culture. Learned to move fast, pitch "
-            "boldly, and sweat the typography."
+            "Built OCR application gateway for team's product on legal and compliance document management. "
         ),
-        "tags": ["Branding", "Web Design", "Art Direction"],
+        "tags": ["Design Systems", "Software Engineerin", "Fullstack"],
     },
+    
     {
-        "period": "2016 — 2017",
-        "role": "Freelance Designer",
-        "company": "Self-employed",
-        "type": "Independent",
+        "period": "September 2024 - Present",
+        "role": "Computer Science Teaching Assistant",
+        "company": "Mount Holyoke College",
+        "type": "Education",
         "description": (
-            "Ran a small freelance practice helping early-stage founders "
-            "launch their first products and identities. Wore every hat, "
-            "from sales to shipping."
+            "Helping fellow students with projects and assignments in Data Structures and Software Development courses"
         ),
-        "tags": ["Freelance", "UI Design", "Logo Design"],
+        "tags": ["Computer Science", "On-campus job"],
     },
 ]
 
 education = [
     {
-        "period": "2014 — 2016",
-        "degree": "M.A. Interaction Design",
-        "school": "Royal College of Art",
-        "location": "London, UK",
+        "period": "2023 - (expected) 2027",
+        "degree": "B.A. Computer Science",
+        "school": "Mount Holyoke College",
+        "location": "South Hadley, MA",
         "description": (
-            "Focused on human-centered design and speculative interfaces. "
-            "Thesis explored designing calmer technology for everyday "
-            "rituals."
+            "I go to school and take classes as a normal student. "
+            "I lead student organizations such as VSA and Girls Who Code, "
+            "sometimes I travel somewhere else to join hackathons."
         ),
-        "highlights": ["Distinction", "Thesis Award", "Student Rep"],
-    },
-    {
-        "period": "2010 — 2014",
-        "degree": "B.Des. Graphic Design",
-        "school": "University of the Arts",
-        "location": "Lagos, Nigeria",
-        "description": (
-            "Built a foundation in typography, print, and visual systems. "
-            "Co-founded the student design collective and ran the annual "
-            "showcase."
-        ),
-        "highlights": ["First Class Honours", "Design Collective Founder"],
-    },
-    {
-        "period": "2021",
-        "degree": "Certificate, Frontend Development",
-        "school": "CareerFoundry",
-        "location": "Remote",
-        "description": (
-            "Leveled up on React and modern CSS so I could prototype and "
-            "ship real, production-ready interfaces alongside engineers."
-        ),
-        "highlights": ["React", "TypeScript", "Accessibility"],
+        "highlights": ["well,..."],
     },
 ]
 
 hobbies = [
-    {
-        "title": "Film Photography",
-        "image": "hobby-photography.png",
-        "description": (
-            "I shoot mostly 35mm — the slowness forces me to actually "
-            "look. Portraits, street corners, and whatever light happens "
-            "to be doing something interesting."
-        ),
-        "accent": "Since 2015",
-    },
     {
         "title": "Trail Hiking",
         "image": "hobby-hiking.png",
@@ -160,78 +106,138 @@ hobbies = [
             "feed friends, and to bring a little of every trip back home."
         ),
         "accent": "Pasta obsessed",
-    },
-    {
-        "title": "Vinyl Collecting",
-        "image": "hobby-vinyl.png",
-        "description": (
-            "A growing wall of records, mostly jazz and old soul. The "
-            "hunt through dusty crates is half the fun."
-        ),
-        "accent": "300+ records",
-    },
+    }
 ]
 
-trips = [
+journal_entries = [
     {
-        "country": "Japan",
-        "city": "Kyoto & Tokyo",
-        "year": "2023",
-        "image": "travel-japan.png",
-        "lon": 138.2529,
-        "lat": 36.2048,
+        "title": "Vietnam",
+        "location": "Ha Tinh, Nghe An, Hanoi, Ho Chi Minh City, Da Nang, Hue, Quang Nam",
         "note": (
-            "Two weeks of temples, tiny noodle bars, and getting joyfully "
-            "lost. Kyoto at cherry blossom season is unreal."
+            "I love Vietnam"
         ),
+        "image": "vietnam/vietnam-lotus.jpeg",
+        "images": [
+            "vietnam/1.jpeg",
+            "vietnam/2.jpeg",
+            "vietnam/3.jpeg",
+            "vietnam/4.jpeg",
+            "vietnam/5.jpeg",
+            "vietnam/6.jpeg",
+        ],
     },
     {
-        "country": "Iceland",
-        "city": "Ring Road",
-        "year": "2022",
-        "image": "travel-iceland.png",
-        "lon": -19.0208,
-        "lat": 64.9631,
+        "title": "United States",
+        "location": "Boston, New York,...",
         "note": (
-            "A campervan loop around the whole island. Waterfalls, black "
-            "beaches, and the northern lights on the last night."
+            "My first long trip abroad — city lights, coastlines, and the feeling "
+            "of starting a new chapter."
         ),
+        "image": "us/WhatsApp Image 2026-07-17 at 14.18.16.jpeg",
+        "images": [
+            "us/1.jpeg",
+            "us/2.jpeg",
+            "us/3.jpeg",
+            "us/WhatsApp Image 2026-07-17 at 14.18.16.jpeg",
+        ],
     },
     {
-        "country": "Morocco",
-        "city": "Marrakech",
-        "year": "2021",
-        "image": "travel-morocco.png",
-        "lon": -7.9811,
-        "lat": 31.6295,
+        "title": "France",
+        "location": "Paris",
         "note": (
-            "The souks were sensory overload in the best way. Came home "
-            "with spices, a rug, and a thousand color references."
+            "Enjoy roaming around Paris moments with my dear friends, "
+            "seeing museums, cathedrals, rivers, and Eiffel tower at night."
         ),
+        "image": "france/france_eiffel.jpg",
+        "images": [
+            "france/1.jpeg",
+            "france/2.jpg",
+            "france/3.jpg",
+            "france/4.jpg",
+            "france/5.JPG",
+            "france/6.jpg",
+            "france/7.jpg",
+            "france/8.JPG",
+            "france/9.jpg",
+            "france/10.jpg",
+        ],
     },
     {
-        "country": "Peru",
-        "city": "Cusco & Machu Picchu",
-        "year": "2019",
-        "image": "travel-peru.png",
-        "lon": -72.545,
-        "lat": -13.1631,
+        "title": "Italy",
+        "location": "Rome, Florence (Firenze)",
         "note": (
-            "Hiked the Salkantay trek to Machu Picchu. Hardest and most "
-            "rewarding five days of walking I have ever done."
+            "Classic streets, bright piazzas, and the slow pleasure of "
+            "cafe moments between ancient ruins."
         ),
+        "image": "italy/italy_rome.jpg",
+        "images": [
+            "italy/1.jpeg",
+            "italy/2.jpeg",
+            "italy/3.jpeg",
+            "italy/4.jpg",
+            "italy/5.JPG",
+            "italy/6.jpg",
+            "italy/7.jpg",
+            "italy/8.jpg",
+            "italy/9.jpg",
+            "italy/10.jpg",
+        ],
     },
     {
-        "country": "Italy",
-        "city": "Amalfi Coast",
-        "year": "2018",
-        "image": "travel-italy.png",
-        "lon": 14.6027,
-        "lat": 40.634,
+        "title": "Slovenia",
+        "location": "Ljubljana & Lake Bled",
         "note": (
-            "Lemons, cliffside towns, and far too much gelato. A slow, "
-            "sun-drenched week of doing very little on purpose."
+            "Castles, emerald water, and the kind of quiet beauty that feels "
+            "made for long walks and late sunsets."
         ),
+        "image": "slovenia/slov_castle.JPG",
+        "images": [
+            "slovenia/1.jpg",
+            "slovenia/2.jpg",
+            "slovenia/3.jpg",
+            "slovenia/4.jpg",
+            "slovenia/5.JPG",
+            "slovenia/6.jpg",
+            "slovenia/7.jpg",
+            "slovenia/8.jpg",
+            "slovenia/9.jpg",
+            "slovenia/10.jpg",
+            "slovenia/11.jpg",
+            "slovenia/12.JPG",
+            "slovenia/13.jpg",
+            "slovenia/14.jpg",
+        ],
+    },
+    {
+        "title": "Switzerland",
+        "location": "Zurich & the Alps",
+        "note": (
+            "A quick alpine stop with crisp air, rich cheese, and bright mountain light."
+        ),
+        "image": "switzerland/swit_fries.jpg",
+        "images": [
+            "switzerland/swit_fries.jpg",
+        ],
+    },
+    {
+        "title": "Szech",
+        "location": "Prague (Praha)",
+        "note": (
+            "Spicy street food, lantern-lit alleys, and a city full of bold, memorable flavors."
+        ),
+        "image": "szech/szech_astro.jpeg",
+        "images": [
+            "szech/1.jpg",
+            "szech/2.jpg",
+            "szech/3.jpg",
+            "szech/4.jpg",
+            "szech/5.jpg",
+            "szech/6.jpg",
+            "szech/7.jpeg",
+            "szech/8.jpeg",
+            "szech/9.jpeg",
+            "szech/szech_astro.jpeg",
+        ],
     },
 ]
 
