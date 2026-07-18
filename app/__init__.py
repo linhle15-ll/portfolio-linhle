@@ -20,7 +20,9 @@ database_user = os.getenv("MYSQL_USER")
 database_password = os.getenv("MYSQL_PASSWORD")
 database_host = os.getenv("MYSQL_HOST") or "localhost"
 
-if database_user and database_password:
+if os.getenv("TESTING") == "true":
+    mydb = SqliteDatabase(":memory:")
+elif database_user and database_password:
     mydb = MySQLDatabase(
         database_name,
         user=database_user,
