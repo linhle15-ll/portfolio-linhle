@@ -6,12 +6,12 @@ cd ~/portfolio-linhle
 
 git fetch && git reset origin/main --hard
 
-docker compose -f docker-compose.prod.yml down
-
-docker compose -f docker-compose.prod.yml up -d --build
-
 source python3-virtualvenv/bin/activate
 pip install -r requirements.txt
+
+# 5. Restart Docker containers (MySQL etc.)
+docker compose -f docker-compose.prod.yml down
+docker compose -f docker-compose.prod.yml up -d --build
 
 # tmux new-session -d -s portfolio -c ~/portfolio-linhle \; send-keys "source python3-virtualvenv/bin/activate && flask run --host=0.0.0.0 --port=5000" Enter
 # using systemd instead of tmux
