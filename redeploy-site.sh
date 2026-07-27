@@ -20,4 +20,4 @@ systemctl daemon-reload
 systemctl restart myportfolio
 systemctl status myportfolio
 
-echo "Done! Flask is running at http://linhthechef.duckdns.org:5000"
+echo "Done! Flask is running at http://linhthechef.duckdns.org:5001"
