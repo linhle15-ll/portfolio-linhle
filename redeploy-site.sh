@@ -24,4 +24,4 @@ docker compose -f docker-compose.prod.yml up -d --build
 # systemctl restart myportfolio
 # systemctl status myportfolio
 
-echo "Done! Flask is running at http://linhthechef.duckdns.org:5001"
+echo "Done! Website is up at: https://linhthechef.duckdns.org/"
