@@ -14,17 +14,19 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key.pem
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key.pem
           chmod 600 ~/.ssh/deploy-key.pem
-          echo "Host my-vps" >> ~/.ssh/config
-          echo "  HostName $SSH_IP" >> ~/.ssh/config
-          echo "  User $SSH_USER" >> ~/.ssh/config
-          echo "  IdentityFile ~/.ssh/deploy-key.pem" >> ~/.ssh/config
-          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
         env:
-          SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_IP: ${{ secrets.SSH_IP }}
 
       - name: Deploy to VPS
-        run: ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && ./redeploy-site.sh'
+        run: |
+          ssh -i ~/.ssh/deploy-key.pem \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            "${SSH_USER}@${SSH_IP}" \
+            "cd '${PROJECT_ROOT}' && ./redeploy-site.sh"
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_IP: ${{ secrets.SSH_IP }}
+          PROJECT_ROOT: ${{ secrets.PROJECT_ROOT }}
