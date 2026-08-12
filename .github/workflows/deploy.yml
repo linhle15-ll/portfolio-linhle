@@ -28,5 +28,5 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_IP: ${{ secrets.SSH_IP }}
 
-      - name: Deploy portfolio site
-        run: ssh my-vps '/root/portfolio-linhle/redeploy-site.sh'
+      - name: Deploy site
+        run: ssh my-vps '${{ secrets.PROJECT_ROOT }}/redeploy-site.sh '
