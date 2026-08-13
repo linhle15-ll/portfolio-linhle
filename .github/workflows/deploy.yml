@@ -30,3 +30,12 @@ jobs:
 
       - name: Deploy site
         run: ssh my-vps '${{ secrets.PROJECT_ROOT }}/redeploy-site.sh'
+
+      - name: Notify Discord success
+        run: |
+          curl -s -X POST "${{ secrets.DISCORD_DEPLOYMENT_WEBHOOK }}" -d "content=🚀 Deployment Successful"
+
+      - name: Notify Discord failure
+        if: failure()
+        run: |
+          curl -s -X POST "${{ secrets.DISCORD_DEPLOYMENT_WEBHOOK}}" -d "content=🚨 Deployment Failed"
