@@ -31,8 +31,8 @@ jobs:
       - name: Deploy site
         run: ssh my-vps '${{ secrets.PROJECT_ROOT }}/redeploy-site.sh'
 
-      - name: Print container status
-        run: ssh my-vps '${{ secrets.PROJECT_ROOT }} && docker compose -f docker-compose.prod.yml ps'
+      # - name: Print container status
+      #   run: ssh my-vps '${{ secrets.PROJECT_ROOT }} && docker compose -f docker-compose.prod.yml ps'
 
       - name: Notify Discord success
         run: |
