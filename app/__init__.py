@@ -123,7 +123,6 @@ def get_time_line_post():
         ]
     })
 
-
 @app.route('/api/timeline_post/<int:post_id>', methods=['DELETE'])
 def delete_time_line_post(post_id):
     try:
@@ -134,6 +133,20 @@ def delete_time_line_post(post_id):
     post.delete_instance()
     return jsonify({'message': 'timeline post deleted', 'id': post_id})
 
-
+@app.route('/health')
+def health():
+    # Check MySQL connection
+    try:
+        mydb.connect(reuse_if_open=True)
+        mydb.execute_sql('SELECT 1')
+        db_status = "healthy"
+    except Exception as e:
+        db_status = f"unhealthy: {str(e)}"
+    
+    return jsonify({
+        'status': 'healthy',
+        'database': db_status,
+    })
+    
 if __name__ == "__main__":
     app.run(debug=True)
