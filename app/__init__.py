@@ -33,7 +33,7 @@ elif database_user and database_password:
 else:
     mydb = SqliteDatabase("timeline.db")
 
-print(f"MY DATABASE {mydb}")
+print(f"DATABASE {mydb}")
 
 class TimelinePost(Model):
     name = CharField()
